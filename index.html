@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إمساكية رمضان 2026 - مدينة بغداد</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Tahoma;
+    text-align:center;
+    color:white;
+    background:url("https://images.unsplash.com/photo-1564769625905-50e93615e769") no-repeat center center fixed;
+    background-size:cover;
+}
+
+.overlay{
+    background:rgba(0,0,0,0.65);
+    min-height:100vh;
+    padding:20px;
+}
+
+.header{
+    position: relative;
+    background:url('https://upload.wikimedia.org/wikipedia/commons/8/85/%D8%B5%D9%88%D8%B1%D8%A9_%D8%A7%D9%84%D9%85%D8%B3%D8%AC%D8%AF_%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A_%D9%81%D9%8A_%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D8%A7%D9%84%D9%85%D9%86%D9%88%D8%B1%D8%A9.jpg') center/cover no-repeat;
+    padding:60px 20px;
+    border-radius:15px;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:250px;
+}
+
+.header h2{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size:28px;
+    background: rgba(0,0,0,0.5);
+    padding:10px 20px;
+    border-radius:10px;
+}
+
+.profile{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    border:4px solid #ff8c6b;
+    object-fit:cover;
+    margin-top:-70px;
+    background:none;
+}
+
+h1{
+    color:#ff8c6b;
+}
+
+.marhoom-box{
+    background:#3b1b57;
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    padding:25px;
+    border-radius:15px;
+    color:white;
+}
+
+.dua{
+    line-height:1.8;
+    font-size:16px;
+    margin-top:10px;
+}
+
+#timer{
+    font-size:20px;
+    margin:15px 0;
+    color:#FFD700;
+}
+
+details{
+    background:rgba(255,255,255,0.1);
+    margin:10px auto;
+    padding:12px;
+    border-radius:10px;
+    width:95%;
+}
+
+summary{
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+details[open]{
+    background:rgba(255,215,0,0.2);
+}
+
+.friday summary{
+    color:#FFD700;
+}
+
+.times{
+    margin-top:10px;
+    line-height:1.8;
+    font-size:17px;
+}
+</style>
+</head>
+
+<body>
+<div class="overlay">
+
+<div class="header">
+    <h2>الفاتحة على روح المرحوم</h2>
+</div>
+
+<img src="marhoom.jpg" class="profile">
+
+<div class="marhoom-box">
+    <h1> الحاج شهاب  احمد حليوة</h1>
+    <div class="dua">
+    اللهم أنزل على قبره الضياء والنور والفسحة والسرور وجازه بالإحسان إحسانا وبالسيئات عفوا وغفرانا 
+    اللهم انقله من ضيق اللحود إلى جنات الخلود وارحمه واغفر له يارب العالمين. 
+    اللهم اغسله بالماء والثلج والبرد ونقه من الخطايا كما ينقى الثوب الأبيض من الدنس 
+    وابدله داراً خيراً من داره وأهلاً خيراً من أهله
+    </div>
+</div>
+
+<h1>إمساكية رمضان 2026 - لمدينة بغداد</h1>
+<div id="timer">اضغط على أي يوم لحساب الوقت المتبقي للمغرب</div>
+
+<script>
+
+let startDate = new Date("Feb 18, 2026");
+let interval;
+
+function addDays(date, days){
+    let result = new Date(date);
+    result.setDate(result.getDate()+days);
+    return result;
+}
+
+function formatTime(h,m){
+    let ampm = h>=12 ? "PM":"AM";
+    h = h%12;
+    if(h==0) h=12;
+    return (h<10?"0"+h:h)+":"+ (m<10?"0"+m:m)+" "+ampm;
+}
+
+// 🌙 أوقات العصر الحقيقية حسب الجدول الفلكي لبغداد رمضان 2026
+let realAsrTimes = [
+ "15:24", "15:24", "15:25", "15:26", "15:26", 
+ "15:27", "15:28", "15:28", "15:29", "15:30", 
+ "15:30", "15:31", "15:31", "15:32", "15:32",
+ "15:32", "15:33", "15:33", "15:34", "15:34",
+ "15:34", "15:35", "15:35", "15:35", "15:36",
+ "15:36", "15:36", "15:36", "15:36", "15:36"
+];
+
+for(let i=0;i<30;i++){
+
+    let dayDate = addDays(startDate,i);
+    let dayName = dayDate.toLocaleDateString("ar-EG",{weekday:"long"});
+    let fullDate = dayDate.toLocaleDateString("ar-EG");
+
+    let fajrH = 5;
+    let fajrM = 18 - Math.floor(i/3);
+    if(fajrM<0){fajrM+=60; fajrH--;}
+
+    let imsakH = fajrH;
+    let imsakM = fajrM - 10;
+    if(imsakM<0){imsakM+=60; imsakH--;}
+
+    let sunriseH = 6;
+    let sunriseM = 43 - Math.floor(i/3);
+
+    let dhuhr = "12:16 PM";
+
+    // ✅ العصر من الجدول الفلكي
+    let [asrH, asrM] = realAsrTimes[i].split(":").map(x=>parseInt(x));
+    let asr = formatTime(asrH, asrM);
+
+    let maghribH = 17;
+    let maghribM = 50 + Math.floor(i/2);
+    if(maghribM>=60){maghribM-=60; maghribH++;}
+
+    let ishaH = maghribH+1;
+    let ishaM = maghribM+30;
+    if(ishaM>=60){ishaM-=60; ishaH++;}
+
+    let details = document.createElement("details");
+
+    if(dayName.includes("الجمعة")){
+        details.classList.add("friday");
+    }
+
+    details.setAttribute("data-maghrib",maghribH+":"+maghribM);
+
+    details.innerHTML =
+    `<summary>${i+1} رمضان - ${fullDate} (${dayName})</summary>
+    <div class="times">
+    الإمساك: ${formatTime(imsakH,imsakM)}<br>
+    الفجر: ${formatTime(fajrH,fajrM)}<br>
+    الشروق: ${formatTime(sunriseH,sunriseM)}<br>
+    الظهر: ${dhuhr}<br>
+    العصر: ${asr}<br>
+    المغرب: ${formatTime(maghribH,maghribM)}<br>
+    العشاء: ${formatTime(ishaH,ishaM)}
+    </div>`;
+
+    document.querySelector(".overlay").appendChild(details);
+}
+
+function startTimer(h,m){
+
+    clearInterval(interval);
+
+    function update(){
+        let now = new Date();
+        let target = new Date();
+        target.setHours(h,m,0);
+
+        let diff = target - now;
+
+        if(diff<=0){
+            document.getElementById("timer").innerHTML="انتهى وقت الإفطار 🌙";
+            return;
+        }
+
+        let hours = Math.floor(diff/3600000);
+        let mins = Math.floor((diff%3600000)/60000);
+        let secs = Math.floor((diff%60000)/1000);
+
+        document.getElementById("timer").innerHTML=
+        `الوقت المتبقي للمغرب: ${hours} ساعة ${mins} دقيقة ${secs} ثانية`;
+    }
+
+    update();
+    interval=setInterval(update,1000);
+}
+
+document.addEventListener("click",function(e){
+    if(e.target.closest("details")){
+        let d = e.target.closest("details");
+        let [h,m] = d.getAttribute("data-maghrib").split(":");
+        startTimer(parseInt(h),parseInt(m));
+    }
+});
+
+</script>
+
+</div>
+</body>
+  </html>
